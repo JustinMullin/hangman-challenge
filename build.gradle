@@ -1,0 +1,71 @@
+version = '0.1'
+
+ext {
+    appName = "hangman-challenge"
+    gdxVersion = '1.9.6'
+    kotlinVersion = '1.1.51'
+}
+
+buildscript {
+    ext {
+        kotlinVersion = '1.1.51'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+apply plugin: "kotlin"
+apply plugin: "application"
+apply plugin: "idea"
+apply plugin: "scala"
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+repositories {
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+}
+
+applicationDefaultJvmArgs = ["-XstartOnFirstThread"]
+mainClassName = "xyz.jmullin.hangman.HangmanKt"
+
+task pack(type: JavaExec) {
+    workingDir = "src/main/resources/"
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs applicationDefaultJvmArgs
+    main = "xyz.jmullin.hangman.utility.PackKt"
+}
+
+task runVisualize(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    args "visualize"
+    jvmArgs applicationDefaultJvmArgs
+    main = mainClassName
+}
+
+dependencies {
+    compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+    compile "org.reflections:reflections:0.9.11"
+    compile "xyz.jmullin:drifter:0.1"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.19"
+    compile 'org.scala-lang:scala-library:2.12.4'
+}
