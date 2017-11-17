@@ -14,7 +14,9 @@ class Puzzle(internal val solution: String,
              players: List<HangmanBot>) {
     companion object {
         val MaxStrikes = 8
-        val MaxPuzzleScore = 10
+        val CorrectGuessPoints = 1
+        val PerfectPuzzleScore = 50
+        val StrikePenalty = 5
     }
 
     private val initialState = solution.map { "_" }.joinToString("")
@@ -65,12 +67,19 @@ class Puzzle(internal val solution: String,
         }
 
         val results = playerStatuses.map {
-            PlayerResult(it.implementation.name, if(it.strikes == MaxStrikes) 0 else MaxPuzzleScore - it.strikes)
+            PlayerResult(it.implementation.name, calculateScore(it.puzzle, it.strikes))
         }.sortedBy { -it.score }
 
         println(results.joinToString("\n") { "\t${it.name}: ${it.score}" })
 
         return results
+    }
+
+    private fun calculateScore(puzzleState: String, strikes: Int): Int {
+        val solveBonus = if(strikes == MaxStrikes) 0 else PerfectPuzzleScore - strikes * StrikePenalty
+        val correctLetterScore = CorrectGuessPoints * puzzleState.count { it != '_' }
+
+        return solveBonus + correctLetterScore
     }
 
     private fun doTurn(player: PlayerState, guess: Char): PlayerState {

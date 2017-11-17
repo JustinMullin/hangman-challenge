@@ -19,7 +19,7 @@ fewer incorrect guesses.
         1. Any bot which takes more than one second to guess a letter during their turn is considered to
         have failed the puzzle.
     1. After all bots have either solved or failed the puzzle:
-        1. Each bot which solved the puzzle gains points equal to (10 - strikes).
+        1. Each bot which solved the puzzle gains points using the following formula: `lettersRevealed + (50 - strikes*5)`.
         1. Bots which failed the puzzle gain no points.
 1. Points are summed for each bot across the 50 puzzles. The bot with the most points wins the tournament.
 1. In the event of a tie, a victor will be chosen based on arbitrary and capricious judging of the tied
