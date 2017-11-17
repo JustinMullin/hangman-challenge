@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
 
     val tournament = Tournament(Hangman.NumPuzzles, bots)
 
-    if(args.contains("visualize")) {
+    if(!args.contains("headless")) {
         Hangman.visualize = true
 
         val config = Lwjgl3ApplicationConfiguration()

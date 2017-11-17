@@ -44,9 +44,9 @@ You can run a test tournament in text-mode or visualize-mode. In visualize-mode 
 implementations competing against each other in realtime, but a delay will be effected to make activity
 more visible, so tournaments will take longer to run.
 
-`./gradlew run`: Run a text-based tournament.
+`./gradlew run`: Run a tournament in the visualizer. While the tournament is running, hold Space to fast-forward.
 
-`./gradlew runVisualize`: Run a visualized tournament. While in the visualizer, hold Space to fast-forward.
+`./gradlew runHeadless`: Run a text-based tournament (no visualizer). Results will be output to standard out.
 
 Feel free to stack up multiple versions of testing bots locally to see how they perform against each other,
 but please only include a single bot with your Nerdery LDAP username as your final submission in the PR.

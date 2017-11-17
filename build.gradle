@@ -53,9 +53,9 @@ task pack(type: JavaExec) {
     main = "xyz.jmullin.hangman.utility.PackKt"
 }
 
-task runVisualize(type: JavaExec) {
+task runHeadless(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
-    args "visualize"
+    args "headless"
     jvmArgs applicationDefaultJvmArgs
     main = mainClassName
 }
