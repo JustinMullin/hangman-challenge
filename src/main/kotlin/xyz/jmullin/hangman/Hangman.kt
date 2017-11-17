@@ -53,6 +53,7 @@ class Hangman(private val tournament: Tournament) : DrifterGame(Name, Assets) {
         val NumPuzzles = 50
 
         var visualize = false
+        var delayMultiplier = 1f
     }
 
     override fun create() {

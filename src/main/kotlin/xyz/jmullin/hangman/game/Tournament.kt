@@ -30,7 +30,7 @@ class Tournament(numPuzzles: Int, players: List<HangmanBot>) {
                 forEach { scores[it.name] = scores.getOrDefault(it.name, 0) + it.score }
                 if(Hangman.visualize) {
                     Visualizer.puzzleDisplay.applyScores(scores)
-                    delay(PuzzleDisplay.RefreshDelay)
+                    delay((PuzzleDisplay.RefreshDelay * Hangman.delayMultiplier).toLong())
                 }
             }
         }

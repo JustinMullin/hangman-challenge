@@ -58,7 +58,9 @@ class Puzzle(internal val solution: String,
             }
 
             val guesses = jobs.map { withTimeoutOrNull(Hangman.MaxTurnTime, TimeUnit.MILLISECONDS) { it.await() } ?: '!' }
-            if(Hangman.visualize) delay(maxOf(turnStart - System.currentTimeMillis() + PuzzleDisplay.TurnDelay, 0))
+            if(Hangman.visualize) {
+                delay(maxOf((turnStart - System.currentTimeMillis() + PuzzleDisplay.TurnDelay) * Hangman.delayMultiplier, 0f).toLong())
+            }
             playerStatuses = playerStatuses.zip(guesses).map { (player, guess) -> doTurn(player, guess) }
         }
 
