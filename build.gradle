@@ -21,6 +21,9 @@ buildscript {
     }
 }
 
+import static org.apache.tools.ant.taskdefs.condition.Os.FAMILY_MAC
+import static org.apache.tools.ant.taskdefs.condition.Os.isFamily
+
 apply plugin: "kotlin"
 apply plugin: "application"
 apply plugin: "idea"
@@ -40,7 +43,7 @@ repositories {
     maven { url "https://oss.sonatype.org/content/repositories/releases/" }
 }
 
-applicationDefaultJvmArgs = ["-XstartOnFirstThread"]
+applicationDefaultJvmArgs = isFamily(FAMILY_MAC) ? ["-XstartOnFirstThread"] : []
 mainClassName = "xyz.jmullin.hangman.HangmanKt"
 
 task pack(type: JavaExec) {
