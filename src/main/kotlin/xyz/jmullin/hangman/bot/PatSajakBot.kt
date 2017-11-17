@@ -11,6 +11,6 @@ class PatSajakBot : HangmanBot {
     override fun initBot(wordLength: Int, dictionary: List<String>) {}
 
     override fun nextGuess(puzzle: String, strikes: Int, previousGuesses: List<Char>, misses: List<Char>): Char {
-        return "rstlne".getOrNull(previousGuesses.size) ?: '?'
+        return "rstlne".getOrNull(previousGuesses.size % 5) ?: '?'
     }
 }

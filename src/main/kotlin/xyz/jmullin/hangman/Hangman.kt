@@ -16,11 +16,10 @@ import xyz.jmullin.hangman.game.Tournament
  * Main entry point to the game. Starts up a tournament, and optionally a visualizer.
  */
 fun main(args: Array<String>) {
-
     val reflections = Reflections("xyz.jmullin.hangman.bot")
     val bots = reflections.getSubTypesOf(HangmanBot::class.java).mapNotNull {
-        if(!it.isInterface) {
-            it.getConstructor().newInstance()
+        if(!it.isInterface && !it.`package`.name.contains("example")) {
+            it.newInstance()
         } else null
     }
 

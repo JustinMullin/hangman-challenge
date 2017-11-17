@@ -1,9 +1,9 @@
-package xyz.jmullin.hangman.bot
+package xyz.jmullin.hangman.bot.example
 
 import xyz.jmullin.hangman.game.BaseScalaBot
 
 /**
- * Copy this class to implement your bot!
+ * Copy this class into the `xyz.jmullin.hangman.bot` package to start implementing your bot!
  */
 class ExampleScalaBot extends BaseScalaBot {
   /**
