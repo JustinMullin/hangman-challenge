@@ -1,7 +1,5 @@
 package xyz.jmullin.hangman.entity
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
 import xyz.jmullin.drifter.animation.delay
@@ -44,15 +42,21 @@ class PuzzleDisplay(var puzzle: Puzzle? = null) : Entity2D() {
     private var initYs = false
 
     fun applyScores(newScores: Map<String, Int>) {
-        delay(0.5f * Hangman.delayMultiplier) {} then tween(1.5f) { a ->
+        toasts = newScores.map { (player, newScore) ->
+            val oldScore = scores[player] ?: 0
+            player to (newScore - oldScore)
+        }.toMap()
+        toastAlpha = 1f
+
+        delay(0.5f) {} then tween(1.5f) { a ->
             toastAlpha = 1f-a
         } go(this)
 
-        delay(0.75f * Hangman.delayMultiplier) {} then tween(0.25f) { a ->
+        delay(0.75f) {} then tween(0.25f) { a ->
             puzzleAlpha = 1f-a
         } then event {
             scores = newScores.toMap()
-        } then delay(0.25f * Hangman.delayMultiplier) {} then tween(0.5f * Hangman.delayMultiplier) { a ->
+        } then delay(0.25f) {} then tween(0.5f) { a ->
             if(round < Hangman.NumPuzzles) puzzleAlpha = a
         } go(this)
     }
@@ -63,11 +67,6 @@ class PuzzleDisplay(var puzzle: Puzzle? = null) : Entity2D() {
                 val display = current ?: 0f
                 if(display < score) minOf(score.toFloat(), display + delta*10f) else display
             })
-        }
-
-        Hangman.delayMultiplier = when {
-            Gdx.input.isKeyPressed(Input.Keys.SPACE) -> 0.15f
-            else -> 1f
         }
 
         super.update(delta)
