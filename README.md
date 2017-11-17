@@ -11,7 +11,7 @@ In this challenge you will write a bot which plays [Hangman][1], competing again
         1. Each bot is presented with their current puzzle state, and allowed to guess one letter.
             * If the letter is not in the puzzle or was already guessed by this bot, the bot is given a strike.
             * Otherwise all instances of that letter in the puzzle will be revealed to the bot for their next turn.
-        1. Any bots which have 8 strikes have failed the puzzle and are eliminated.
+        1. Any bots which have 8 strikes have failed the puzzle and are eliminated from that puzzle.
         1. Any bots which have correctly guessed all letters in the puzzle have solved the puzzle.
         1. Any bot which takes more than one second to guess a letter during their turn is considered to have failed the puzzle.
     1. After all bots have either solved or failed the puzzle:
@@ -22,11 +22,11 @@ In this challenge you will write a bot which plays [Hangman][1], competing again
 
 ## Implementing Your Bot
 
-To implement a bot, copy one of the example bots from the `xyz.jmullin.hangman.bot` package. Example bots are provided in Kotlin, Java and Scala. Feel free to submit a PR adding support for your favorite JVM language not already represented.
+To implement a bot, copy one of the example bots from the `xyz.jmullin.hangman.bot.example` package into `xyz.jmullin.hangman.bot`. Example bots are provided in Kotlin, Java and Scala. Feel free to submit a PR adding support for your favorite JVM language not already represented.
 
-Bots implement the `xyz.jmullin.hangman.game.HangmanBot` interface. More specific documentation pertaining to implementation can be found there. Any bots implementing the `HangmanBot` interface found in the `xyz.jmullin.hangman.bot` package will be automatically included in the tournament.
+Bots implement the `xyz.jmullin.hangman.game.HangmanBot` interface. More specific documentation pertaining to implementation can be found there. Any bots implementing the `HangmanBot` interface which are located in the `xyz.jmullin.hangman.bot` package will be automatically included in the tournament.
 
-When you're happy with your bot, submit a PR including your bot implementation. We'll run the final tournament once everyone's bots are in.
+When you're happy with your bot, submit a PR including your bot implementation. We'll run the final tournament and determine a victor.
 
 ## Testing Your Bot
 
