@@ -1,7 +1,5 @@
 package xyz.jmullin.hangman.entity
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
 import xyz.jmullin.drifter.animation.delay
@@ -10,6 +8,7 @@ import xyz.jmullin.drifter.animation.tween
 import xyz.jmullin.drifter.entity.Entity2D
 import xyz.jmullin.drifter.extensions.*
 import xyz.jmullin.drifter.rendering.RenderStage
+import xyz.jmullin.drifter.rendering.fill
 import xyz.jmullin.drifter.rendering.sprite
 import xyz.jmullin.drifter.rendering.string
 import xyz.jmullin.hangman.Assets
@@ -44,7 +43,9 @@ class PuzzleDisplay(var puzzle: Puzzle? = null) : Entity2D() {
     private var initYs = false
 
     fun applyScores(newScores: Map<String, Int>) {
-        delay(0.25f) {
+        clearHooks()
+
+        delay(0.25f*Hangman.delayMultiplier) {
             toasts = newScores.map { (player, newScore) ->
                 val oldScore = scores[player] ?: 0
                 player to (newScore - oldScore)
@@ -66,15 +67,10 @@ class PuzzleDisplay(var puzzle: Puzzle? = null) : Entity2D() {
     }
 
     override fun update(delta: Float) {
-        Hangman.delayMultiplier = when {
-            Gdx.input.isKeyPressed(Input.Keys.SPACE) -> 0.1f
-            else -> 1f
-        }
-
         scores.forEach { player, score ->
             displayScores.compute(player, { _, current ->
                 val display = current ?: 0f
-                if(display < score) minOf(score.toFloat(), display + delta*100f) else display
+                if(display < score) minOf(score.toFloat(), display + delta*(100f/Hangman.delayMultiplier)) else display
             })
         }
 
@@ -96,8 +92,10 @@ class PuzzleDisplay(var puzzle: Puzzle? = null) : Entity2D() {
             val dY = gameH() / (players.size+1)
             val offsetY = gameH()/2f - (dY*players.size.toFloat())/2f
 
+            fill(V2(0f, gameH()-52f), V2(gameW(), 52f), C(0.1f))
+
             Assets.titleFont.color = Color.WHITE
-            string("NERDERY HANGMAN CHALLENGE", V2(gameW()/2f, gameH()), Assets.titleFont, V2(0f, -1f))
+            string("NERDERY HANGMAN CHALLENGE", V2(gameW()/2f + 100f, gameH()), Assets.titleFont, V2(0f, -1f))
 
             Assets.uiFont.color = Color.WHITE
             val roundMessage = if(round < Hangman.NumPuzzles) {
@@ -105,7 +103,7 @@ class PuzzleDisplay(var puzzle: Puzzle? = null) : Entity2D() {
             } else {
                 "Final"
             }
-            string(roundMessage, V2(8f, gameH()-8f), Assets.uiFont, V2(1f, -1f))
+            string(roundMessage, V2(10f, gameH()-14f), Assets.uiFont, V2(1f, -1f))
 
             players.sortedBy { scores[it.implementation.name] ?: 0 }
             .forEachIndexed { playerI, player ->

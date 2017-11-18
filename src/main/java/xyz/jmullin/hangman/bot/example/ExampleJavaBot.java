@@ -1,9 +1,8 @@
 package xyz.jmullin.hangman.bot.example;
 
+import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import xyz.jmullin.hangman.game.HangmanBot;
-
-import java.util.List;
 
 /**
  * Copy this class into the `xyz.jmullin.hangman.bot` package to start implementing your bot!

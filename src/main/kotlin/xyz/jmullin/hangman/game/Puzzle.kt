@@ -1,7 +1,10 @@
 package xyz.jmullin.hangman.game
 
-import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.withTimeoutOrNull
 import xyz.jmullin.hangman.Hangman
+import xyz.jmullin.hangman.Visualizer
 import xyz.jmullin.hangman.entity.PuzzleDisplay
 import java.util.concurrent.TimeUnit
 

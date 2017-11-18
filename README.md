@@ -18,18 +18,18 @@ fewer incorrect guesses.
         1. Any bots which have correctly guessed all letters in the puzzle have solved the puzzle.
         1. Any bot which takes more than one second to guess a letter during their turn is considered to
         have failed the puzzle.
-    1. After all bots have either solved or failed the puzzle:
-        1. Each bot which solved the puzzle gains points using the following formula: `lettersRevealed + (50 - strikes*5)`.
-        1. Bots which failed the puzzle gain no points.
+    1. After all bots have either solved or failed the puzzle, each bot gains points using the formula:
+    `charactersRevealed + (50 - strikes*5)`.
 1. Points are summed for each bot across the 50 puzzles. The bot with the most points wins the tournament.
 1. In the event of a tie, a victor will be chosen based on arbitrary and capricious judging of the tied
 bot's implementations.
 
 ## Implementing Your Bot
 
-To implement a bot, copy one of the example bots from the `xyz.jmullin.hangman.bot.example` package
-into `xyz.jmullin.hangman.bot`. Example bots are provided in Kotlin, Java and Scala. Feel free to submit
-a PR adding support for your favorite JVM language not already represented.
+Example bots are provided in Kotlin, Java and Scala. To implement a bot, open the source directory for your
+chosen language and copy one of the example bots from the `xyz.jmullin.hangman.bot.example` package into
+`xyz.jmullin.hangman.bot`. Feel free to submit a PR adding support for your favorite JVM language if it's not already
+represented.
 
 Bots implement the `xyz.jmullin.hangman.game.HangmanBot` interface. More specific documentation pertaining
 to implementation can be found there. Any bots implementing the `HangmanBot` interface which are located
@@ -40,16 +40,17 @@ and determine a victor.
 
 ## Testing Your Bot
 
-You can run a test tournament in text-mode or visualize-mode. In visualize-mode you can see all the bot
-implementations competing against each other in realtime, but a delay will be effected to make activity
-more visible, so tournaments will take longer to run.
+You can run a test tournament in the visualizer or headless mode. In the visualizer you can see all the bot
+implementations competing against each other in realtime, and control simulation speed. Headless mode
+eschews display and animations, and outputs the results of each puzzle and the final scores to standard out;
+it's useful for rapid testing and comparison of new strategies.
 
-`./gradlew run`: Run a tournament in the visualizer. While the tournament is running, hold Space to fast-forward.
+`./gradlew run`: Run a tournament in the visualizer.
 
-`./gradlew runHeadless`: Run a text-based tournament (no visualizer). Results will be output to standard out.
+`./gradlew runHeadless`: Run a text-based tournament.
 
 Feel free to stack up multiple versions of testing bots locally to see how they perform against each other,
-but please only include a single bot with your Nerdery LDAP username as your final submission in the PR.
+but please only include a single bot named with your Nerdery LDAP username as your final submission in the PR.
 
 ## Questions or Concerns?
 

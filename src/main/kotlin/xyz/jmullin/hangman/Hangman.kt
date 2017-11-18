@@ -10,6 +10,7 @@ import xyz.jmullin.drifter.extensions.V2
 import xyz.jmullin.drifter.extensions.xI
 import xyz.jmullin.drifter.extensions.yI
 import xyz.jmullin.hangman.game.HangmanBot
+import xyz.jmullin.hangman.game.Playback
 import xyz.jmullin.hangman.game.Tournament
 
 /**
@@ -53,7 +54,10 @@ class Hangman(private val tournament: Tournament) : DrifterGame(Name, Assets) {
         val NumPuzzles = 50
 
         var visualize = false
-        var delayMultiplier = 1f
+
+        var playbackMode: Playback = Playback.Play
+        val delayMultiplier: Float
+            get() = playbackMode.delayMultiplier
     }
 
     override fun create() {

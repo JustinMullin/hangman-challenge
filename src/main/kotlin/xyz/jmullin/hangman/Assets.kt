@@ -12,4 +12,9 @@ object Assets : DrifterAssets("hangman") {
     val uiFont by font("kenyanCoffee")
 
     val strike by sprite
+
+    val slow by sprite
+    val play by sprite
+    val fastForward by sprite
+    val tripleFast by sprite
 }
