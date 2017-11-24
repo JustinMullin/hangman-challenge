@@ -1,6 +1,6 @@
 (ns xyz.jmullin.hangman.bot.example.ExampleClojureBot
   (:gen-class
-   :extends xyz.jmullin.hangman.game.HangmanBot))
+   :implements xyz.jmullin.hangman.game.HangmanBot))
 
 (defn -getName
   "Your Nerdery LDAP username (e.g. jmullin), for purposes of tracking and identification."
